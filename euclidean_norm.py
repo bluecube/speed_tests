@@ -24,9 +24,11 @@ testit('math.sqrt(vector[0] * vector[0] + vector[1] * vector[1] + vector[2] * ve
 print()
 print('numpyvector =', repr(numpyvector))
 
-testit('numpy.linalg.norm(numpyvector)') # Too slow
-testit('math.sqrt(numpy.sum(numpy.multiply(numpyvector, numpyvector)))') # Too slow
+#testit('numpy.linalg.norm(numpyvector)') # Too slow
+#testit('math.sqrt(numpy.sum(numpy.multiply(numpyvector, numpyvector)))') # Too slow
 testit('math.sqrt(numpyvector * numpyvector.T)')
 testit('math.sqrt(numpyvector[0,0] * numpyvector[0,0] + numpyvector[0,1] * numpyvector[0,1] + numpyvector[0,2] * numpyvector[0,2])')
 testit('v = tuple(numpyvector.flat); math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2])')
+testit('v = numpyvector.flat; math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2])')
 testit('math.sqrt(math.fsum(x*x for x in numpyvector.flat))')
+testit('math.sqrt(math.fsum(numpy.multiply(numpyvector.flat, numpyvector.flat)))')
