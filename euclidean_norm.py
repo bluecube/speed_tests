@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 
 import timeit
 import numpy
@@ -32,3 +32,4 @@ testit('v = tuple(numpyvector.flat); math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] 
 testit('v = numpyvector.flat; math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2])')
 testit('math.sqrt(math.fsum(x*x for x in numpyvector.flat))')
 testit('math.sqrt(math.fsum(numpy.multiply(numpyvector.flat, numpyvector.flat)))')
+testit('math.sqrt(math.fsum(numpy.multiply(numpyvector, numpyvector).flat))')
