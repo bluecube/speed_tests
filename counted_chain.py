@@ -5,7 +5,7 @@ import itertools
 
 def iterators():
     while True:
-        yield iter(range(1000))
+        yield iter(range(100))
 
 def testit(what):
     print("testing {}:".format(what))
@@ -17,6 +17,8 @@ it = {0}(iterators())
         '''.format(what)
     ))
 
+# chain_from_iterable doesn't do the same thing as the other
+# functions. it is here only for comparison.
 chain_from_iterable = itertools.chain.from_iterable
 testit('chain_from_iterable')
 
