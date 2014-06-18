@@ -5,18 +5,25 @@ import random
 import itertools
 import operator
 
-data = sorted(random.randint(0, 1000) for i in range(100000))
+long_list = [random.randint(0, 1000) for i in range(10000)]
+short_list = [random.randint(0, 1000) for i in range(100)]
 
 def testit(what):
-    print("testing {}:".format(what))
+    print("testing {} - long list:".format(what))
     print(timeit.repeat(
-        'list({}(data))'.format(what),
-        'from __main__ import data, {0}'.format(what),
+        'list({}(long_list))'.format(what),
+        'from __main__ import long_list, {0}'.format(what),
         number=1000
+    ))
+    print("testing {} - short list:".format(what))
+    print(timeit.repeat(
+        'list({}(short_list))'.format(what),
+        'from __main__ import short_list, {0}'.format(what),
+        number=1000000
     ))
 
 def generator(sequence):
-    it = iter(sequence)
+    it = iter(sorted(sequence))
     previous = next(it)
     for x in it:
         if x != previous:
@@ -26,14 +33,18 @@ def generator(sequence):
 testit('generator')
 
 def groupby1(sequence):
-    return (x[0] for x in itertools.groupby(sequence))
+    return (x[0] for x in itertools.groupby(sorted(sequence)))
 testit('groupby1')
 
 def groupby2(sequence):
     return map(
         operator.itemgetter(0),
-        itertools.groupby(sequence))
+        itertools.groupby(sorted(sequence)))
 testit('groupby2')
+
+def sorted_set(sequence):
+    return sorted(set(sequence))
+testit('sorted_set')
 
 # Too slow
 #def uniq_zip(sequence):
